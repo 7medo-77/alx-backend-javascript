@@ -4,8 +4,8 @@ export default function taskBlock(trueOrFalse) {
     task2 = false;
   }
 
-  let task;
-  let task2;
+  var task;
+  var task2;
 
   return [task, task2];
 }
