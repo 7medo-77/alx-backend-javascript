@@ -12,7 +12,7 @@ export default function createIteratorObject(report) {
   return {
     data: employeeArray,
     [Symbol.iterator]() {
-      let index = 0;
+      const index = 0;
       return {
         next: () => {
           if (index < this.data.length) {
