@@ -1,5 +1,6 @@
 export default function createIteratorObject(report) {
-  const employeeComplex = Object.values(report.allEmployees).map((element) => element.map((employee) => employee));
+  const employeeComplex = Object.values(report.allEmployees)
+    .map((element) => element.map((employee) => employee));
   const employeeArray = [];
 
   for (const employees of employeeComplex) {
