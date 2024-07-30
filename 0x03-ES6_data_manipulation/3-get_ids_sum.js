@@ -1,3 +1,3 @@
 export default function getStudentIdsSum(objects) {
-  return objects.reduce((prev, next) => prev + next);
+  return objects.map((object) => object.id).reduce((prev, next) => prev + next);
 }
