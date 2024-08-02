@@ -1,16 +1,20 @@
-/**
- * Creates a buffer array with a given position set to a given value.
- * @param {Number} length - The length of the buffer.
- * @param {Number} position - The position to modify.
- * @param {Number} value - The value to be stored in the position.
- * @author Bezaleel Olakunori <https://github.com/B3zaleel>
- * @returns {DataView}
- */
-export default function createInt8TypedArray(length, position, value) {
-  if (position >= length) {
+export default function createInt8TypedArrayMine(length, position, value) {
+  const bufferNew = new ArrayBuffer(length);
+  const viewConstruct = new DataView(bufferNew);
+  // const int8View = new Int8Array(bufferNew);
+
+  if (position >= 0 && position <= length - 1) {
+    viewConstruct.setInt8(position, value);
+  } else {
     throw new Error('Position outside range');
   }
-  const buf = new DataView(new ArrayBuffer(length), 0, length);
-  buf.setInt8(position, value);
-  return buf;
+
+  // if (int8View[position] !== undefined) {
+  //   int8View[position] = value;
+  // } else {
+  //   throw new Error('Position outside range');
+  // }
+
+  return viewConstruct;
+  // return int8View;
 }
