@@ -22,5 +22,5 @@ export default function cleanSet(set, startString) {
   });
 
   // return new Set(stringArray);
-  return resString;
+  return stringArray.join('-');
 }
