@@ -21,5 +21,6 @@ export default function cleanSet(set, startString) {
       }
     }
   }
+  console.log(parts);
   return parts.join('-');
 }

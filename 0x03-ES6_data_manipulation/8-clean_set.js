@@ -1,6 +1,6 @@
 export default function cleanSet(set, startString) {
   const stringArray = [];
-  let resString = '';
+  let resArray = [];
 
   for (const string of set.values()) {
     let stringExample = '';
@@ -12,15 +12,6 @@ export default function cleanSet(set, startString) {
     }
     stringArray.push(stringExample);
   }
-
-  stringArray.forEach((word, index) => {
-    if (word.length !== 0) {
-      resString += `${index < stringArray.length - 2 ? `${word}-` : word}`;
-    } else {
-      stringArray.pop(word);
-    }
-  });
-
-  // return new Set(stringArray);
-  return stringArray.join('-');
+  resArray = stringArray.filter((string) => string.length > 0);
+  return resArray.join('-');
 }
