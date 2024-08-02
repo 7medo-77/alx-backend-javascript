@@ -1,9 +1,4 @@
 export default function setFromArray(inputArray) {
-  const newSet = new Set();
-
-  for (const number of inputArray) {
-    newSet.add(number);
-  }
-
+  const newSet = new Set(inputArray);
   return newSet;
 }
