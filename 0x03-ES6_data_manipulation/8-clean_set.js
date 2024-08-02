@@ -2,6 +2,10 @@ export default function cleanSet(set, startString) {
   const stringArray = [];
   let resArray = [];
 
+  if (!set || !startString || typeof startString !== 'string' || !(set instanceof Set)) {
+    return '';
+  }
+
   for (const string of set.values()) {
     let stringExample = '';
 
