@@ -3,7 +3,7 @@ export default function createInt8TypedArrayMine(length, position, value) {
   const viewConstruct = new DataView(bufferNew);
   // const int8View = new Int8Array(bufferNew);
 
-  if (position >= 0 && position <= length - 1) {
+  if (position >= 0 && position <= length) {
     viewConstruct.setInt8(position, value);
   } else {
     throw new Error('Position outside range');
