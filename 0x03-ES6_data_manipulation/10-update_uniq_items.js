@@ -8,6 +8,4 @@ export default function updateUniqueItems(inputMap) {
       inputMap.set(key, 100);
     }
   });
-
-  return inputMap;
 }
