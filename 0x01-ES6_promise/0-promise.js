@@ -1,3 +1,4 @@
 export default async function getResponseFromAPI() {
-  return new Promise();
+  const newPromise = new Promise(() => {});
+  return newPromise;
 }
