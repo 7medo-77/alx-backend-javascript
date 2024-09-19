@@ -8,7 +8,6 @@ function countStudents(fileLocation) {
       const dataList = data.split('\n');
       const newList = dataList.slice(1, dataList.length - 1);
       const trackFreq = new Map();
-      console.log(newList);
 
       for (const record of newList) {
         const cellList = record.split(',');
@@ -25,7 +24,7 @@ function countStudents(fileLocation) {
       }
       console.log(`Number of students: ${newList.length}`);
       for (const [key, value] of trackFreq) {
-        console.log(`Number of Students in ${key}: ${value.length}: List: ${value.join(' ')}`);
+        console.log(`Number of students in ${key}: ${value.length}. List: ${value.join(', ')}`);
       }
     }
   });
