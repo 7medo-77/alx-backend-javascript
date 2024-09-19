@@ -4,17 +4,18 @@ function countStudents(fileLocation) {
   try {
     const data = fs.readFileSync(fileLocation, 'utf8');
     const dataList = data.split('\n');
-    const newList = dataList.slice(1, dataList.length - 1);
+    const newList = dataList.filter((row, index) => {
+      const recordLength = dataList[0].split(',').length;
+      if (index !== 0 && row.split(',').length === recordLength) {
+        return row;
+      }
+    });
     const trackFreq = new Map();
 
     for (const record of newList) {
       const cellList = record.split(',');
       const firstName = cellList[0];
       const track = cellList[cellList.length - 1];
-
-      if (cellList.length === 0) {
-        continue;
-      }
 
       if (trackFreq.has(track)) {
         trackFreq.get(track).push(firstName);
