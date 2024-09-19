@@ -14,6 +14,10 @@ function countStudents(fileLocation) {
         const firstName = cellList[0];
         const track = cellList[cellList.length - 1];
 
+        if (cellList.length === 0) {
+          continue;
+        }
+
         if (trackFreq.has(track)) {
           trackFreq.get(track).push(firstName);
         } else {
