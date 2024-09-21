@@ -1,4 +1,4 @@
-const fs = require('node:fs');
+const fs = require('fs');
 
 function countStudents(fileLocation) {
   return new Promise((resolve, reject) => {
@@ -7,7 +7,6 @@ function countStudents(fileLocation) {
         reject(new Error('Cannot load the database'));
       }
       const dataList = data.split('\n');
-
       const newList = dataList.filter((row, index) => {
         const recordLength = dataList[0].split(',').length;
         return index !== 0 && row.split(',').length === recordLength;
