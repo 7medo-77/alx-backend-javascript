@@ -10,10 +10,7 @@ function countStudents(fileLocation) {
 
       const newList = dataList.filter((row, index) => {
         const recordLength = dataList[0].split(',').length;
-        if (index !== 0 && row.split(',').length === recordLength) {
-          return true;
-        }
-        return false;
+        return index !== 0 && row.split(',').length === recordLength;
       });
 
       const trackFreq = new Map();
