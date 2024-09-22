@@ -1,24 +1,25 @@
-const { ShouldThrow, expect } = require('chai');
-const sinon = require('sinon');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
-const countStudents = require('./2-read_file.js');
+process.argv[2] = './blabla.csv';
+const app = require('./5-http');
 
-describe('countStudents', () => {
-  let consoleSpy;
+chai.use(chaiHttp);
+chai.should();
 
-  beforeEach(() => {
-    consoleSpy = sinon.spy(console, 'log');
-  });
-
-  afterEach(() => {
-    consoleSpy.restore();
-  });
-
-  it('logs to the console the right messages', () => {
-    countStudents('./database.csv');
-
-    expect(consoleSpy.calledWith('Number of students: 10')).to.be.true;
-    expect(consoleSpy.calledWith('Number of students in CS: 6. List: Johenn, Arielle, Jonathen, Emmenuel, Guillaume, Katie')).to.be.true;
-    expect(consoleSpy.calledWith('Number of students in SWE: 4. List: Guillaume, Joseph, Paul, Tommy')).to.be.true;
+describe('more complex HTTP server using node', () => {
+  describe('when the database is not available', () => {
+    before(() => {
+      process.argv[2] = './blabla.csv';
+    });
+    it('returns the right error message', () => new Promise((done) => {
+      chai.request(app)
+        .get('/students')
+        .end((error, response) => {
+          chai.expect(response.text).to.equal(`This is the list of our students
+Cannot load the database`);
+          done();
+        });
+    }));
   });
 });

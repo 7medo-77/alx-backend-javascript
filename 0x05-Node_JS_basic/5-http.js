@@ -13,7 +13,7 @@ const app = http.createServer((req, res) => {
     const fileLocation = process.argv[2] === undefined ? '' : process.argv[2];
     fs.readFile(fileLocation, 'utf8', (err, data) => {
       if (err) {
-        res.write('Error: Cannot load the database\n');
+        res.write('Cannot load the database\n');
         res.end();
       } else {
         const dataList = data.split('\n');
@@ -48,7 +48,6 @@ const app = http.createServer((req, res) => {
 });
 
 app.listen(1245, () => {
-  console.log('Server is Running!');
 });
 
 module.exports = app;
