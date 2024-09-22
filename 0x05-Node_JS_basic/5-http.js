@@ -10,33 +10,39 @@ const app = http.createServer((req, res) => {
     res.write('This is the list of our students\n');
     // res.write(countStudents('database.csv'));
 
-    fs.readFile(process.argv[2], 'utf8', (err, data) => {
-      const dataList = data.split('\n');
-      const newList = dataList.filter((row, index) => {
-        const recordLength = dataList[0].split(',').length;
-        return index !== 0 && row.split(',').length === recordLength;
-      });
+    const fileLocation = process.argv[2] === undefined ? '' : process.argv[2];
+    fs.readFile(fileLocation, 'utf8', (err, data) => {
+      if (err) {
+        res.write('Error: Cannot load the database\n');
+        res.end();
+      } else {
+        const dataList = data.split('\n');
+        const newList = dataList.filter((row, index) => {
+          const recordLength = dataList[0].split(',').length;
+          return index !== 0 && row.split(',').length === recordLength;
+        });
 
-      const trackFreq = new Map();
+        const trackFreq = new Map();
 
-      for (const record of newList) {
-        const cellList = record.split(',');
-        const firstName = cellList[0];
-        const track = cellList[cellList.length - 1];
+        for (const record of newList) {
+          const cellList = record.split(',');
+          const firstName = cellList[0];
+          const track = cellList[cellList.length - 1];
 
-        if (trackFreq.has(track)) {
-          trackFreq.get(track).push(firstName);
-        } else {
-          const firstNameArray = [];
-          firstNameArray.push(firstName);
-          trackFreq.set(track, firstNameArray);
+          if (trackFreq.has(track)) {
+            trackFreq.get(track).push(firstName);
+          } else {
+            const firstNameArray = [];
+            firstNameArray.push(firstName);
+            trackFreq.set(track, firstNameArray);
+          }
         }
+        res.write(`Number of students: ${newList.length}\n`);
+        for (const [key, value] of trackFreq) {
+          res.write(`Number of students in ${key}: ${value.length}. List: ${value.join(', ')}\n`);
+        }
+        res.end();
       }
-      res.write(`Number of students: ${newList.length}\n`);
-      for (const [key, value] of trackFreq) {
-        res.write(`Number of students in ${key}: ${value.length}. List: ${value.join(', ')}\n`);
-      }
-      res.end();
     });
   }
 });
