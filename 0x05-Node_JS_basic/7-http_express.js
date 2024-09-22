@@ -15,7 +15,7 @@ app.get('/students', (req, res) => {
   outputString.push('This is the list of our students');
   fs.readFile(fileLocation, 'utf8', (err, data) => {
     if (err) {
-      outputString.push('Cannot load the database');
+      outputString.push(new Error('Cannot load the database').message);
       res.send(`${outputString.join('\n')}\n`);
       res.end();
     } else {
